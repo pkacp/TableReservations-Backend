@@ -13,7 +13,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.Date;
+
+import static java.lang.Integer.parseInt;
 
 @Component
 public class JwtUtils {
@@ -33,7 +36,7 @@ public class JwtUtils {
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))
                 .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                .setExpiration(new Date((new Date()).getTime() + parseInt(jwtExpirationMs)))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
