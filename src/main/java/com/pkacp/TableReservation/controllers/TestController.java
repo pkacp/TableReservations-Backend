@@ -28,6 +28,16 @@ public class TestController {
         return "Admin Board.";
     }
 
+    @GetMapping("/aaa")
+    public String aaa() {
+        return "Aaaaaaaaaa.";
+    }
+
+    @GetMapping("")
+    public String blankTest() {
+        return "XXXXXXXXXXXXXXXXXXXXXXXX";
+    }
+
     @PostMapping("/insert_test")
     @PreAuthorize("hasRole('ADMIN')")
     public String adminInsert() {
