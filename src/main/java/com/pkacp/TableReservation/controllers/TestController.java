@@ -17,19 +17,19 @@ public class TestController {
     }
 
     @GetMapping("/user")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')") //TODO check string vs enum
+    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     public String userAccess() {
         return "User Content.";
     }
 
     @GetMapping("/admin")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String adminAccess() {
         return "Admin Board.";
     }
 
     @PostMapping("/insert_test")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String adminInsert() {
         return "Success insert";
     }
