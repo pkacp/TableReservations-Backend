@@ -1,74 +1,39 @@
 package com.pkacp.TableReservation.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "reservations")
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date reservationStart;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date reservationEnd;
-
-    @Size(min = 1)
+    @NotNull
     private int size;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "reservation_dining_tables", joinColumns = @JoinColumn(name = "reservation_id"), inverseJoinColumns = @JoinColumn(name = "dining_table_id"))
-    private Set<DiningTable> diningTables = new HashSet<>();
+    private Date start;
+
+    private Date end;
+
+    private boolean confirmed;
 
     public Reservation() {
     }
 
-    public Reservation(Date reservationStart, Date reservationEnd, @Size(min = 1) int size) {
-        this.reservationStart = reservationStart;
-        this.reservationEnd = reservationEnd;
+    public Reservation(@NotNull int size, Date start, Date end) {
         this.size = size;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getReservationStart() {
-        return reservationStart;
-    }
-
-    public void setReservationStart(Date reservationStart) {
-        this.reservationStart = reservationStart;
-    }
-
-    public Date getReservationEnd() {
-        return reservationEnd;
-    }
-
-    public void setReservationEnd(Date reservationEnd) {
-        this.reservationEnd = reservationEnd;
+        this.start = start;
+        this.end = end;
+        this.confirmed = false;
     }
 
     public int getSize() {
@@ -78,5 +43,28 @@ public class Reservation {
     public void setSize(int size) {
         this.size = size;
     }
-}
 
+    public Date getStart() {
+        return start;
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    public Date getEnd() {
+        return end;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
+    }
+}
